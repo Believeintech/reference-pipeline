@@ -6,6 +6,8 @@ def call(String dockerHubUser, String serviceName, String buildTag, String manif
           git config user.name "Jenkins CI"
           git add ${manifestPath}
           git commit -m "Update ${serviceName} image to ${buildTag} [skip ci]"
+          git fetch https://\$GIT_USER:\$GIT_TOKEN@github.com/Believeintech/microservices-demo.git main
+          git rebase FETCH_HEAD
           git push https://\$GIT_USER:\$GIT_TOKEN@github.com/Believeintech/microservices-demo.git HEAD:main
         """
     }
